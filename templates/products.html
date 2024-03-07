@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+        /* Add transition effect to transform and box-shadow */
+    }
+
+    .card:hover {
+        transform: scale(0.9);
+        /* Increase the size of the card on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* Add a subtle shadow effect on hover */
+        opacity: 0.8;
+        /* Set a lower opacity on hover */
+    }
+
+    /* Responsiveness for all screens */
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+</style>
+
+<div class="container-fluid mx-1">
+    <div class="row">
+        {% for product in products.items %}
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Product Type: {{ product.type }}</p>
+                    <p class="card-text">Product Object: {{ product.object }}</p>
+                    <p class="card-text">Rating: {{ product.reviews[0].rating if product.reviews else 'No rating' }}</p>
+                    <p class="card-text">Poor: {{ product.reviews[0].rating if product.reviews and
+                        product.reviews[0].rating == 'poor' else 'No poor rating' }}</p>
+                    <p class="card-text">Comment: {{ product.reviews[0].comment if product.reviews else 'No comment' }}
+                    </p>
+                    <p class="card-text">Image URL: {{ product.reviews[0].image_url if product.reviews and
+                        product.reviews[0].image_url else 'No image URL' }}</p>
+                </div>
+            </div>
+        </div>
+        {% if loop.index % 2 == 0 %}
+    </div>
+    <div class="row">{% endif %}
+        {% endfor %}
+    </div>
+
+    {{ pagination.links }}
+</div>
+{% endblock %}

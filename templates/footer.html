@@ -1,0 +1,43 @@
+<style>
+  .register-link:hover {
+    color: rgb(99, 193, 200);
+    transform: scale(1.1) translate(2px);
+  }
+
+  footer {
+    position: fixed;
+    /* Change position to fixed */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    /* Add a higher z-index to ensure the footer appears on top of other elements */
+  }
+
+  .content-container {
+    padding-bottom: 80px;
+    /* Add padding to the bottom of the container */
+  }
+</style>
+
+<div class="content-container">
+  <!-- Your content before the footer goes here -->
+</div>
+
+<footer class="text-center fw-bold fixed-bottom" style="background-color: rgb(173, 196, 206); color:rgb(53, 70, 73);">
+  <div class="container p-3 pb-0">
+    <section class="">
+      {% if not (request.path.startswith('/signup') or request.path.startswith('/signin') or
+      request.path.startswith('/board')) %}
+      <p class="d-flex justify-content-center align-items-center">
+        <span class="me-3">Register for free</span>
+        <a href="/signup" class="register-link" style="color:rgb(29, 93, 155)">Register!</a>
+      </p>
+      {% endif %}
+    </section>
+  </div>
+  <div class="text-center p-3" style="background-color: rgb(150, 182, 197);">
+    &copy; 2024 Feedback&Review:
+    <a class="text-dark" href="/">FEEDBACK&REVIEW</a>
+  </div>
+</footer>

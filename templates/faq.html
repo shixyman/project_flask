@@ -1,0 +1,90 @@
+<style>
+    .accordion-body {
+        background-color: #A3C6C4;
+        font-weight: 600;
+
+    }
+
+    .accordion-button {
+        background-color: #E0E7E9;
+        font-weight: 700;
+    }
+
+    .accordion-item {
+        margin: 20px;
+    }
+</style>
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <h2>FAQ (Frequently Asked Questions)</h2>
+    <div class="accordion accordion-flush p-2 m-5" id="accordionFlushExample">
+        <div class="accordion-item ">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    How do I use the app feedback/reviews feature?
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">To use the app's feedback/reviews feature, navigate to the designated
+                    section within the app. Look for a button or link that says "Feedback" or "Reviews." Click on it to
+                    access the feedback/reviews form. Provide your feedback or review in the provided input fields, and
+                    submit the form when you're done.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Do feedback/reviews from users have credibility?
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">The credibility of feedback/reviews from users can vary. While user
+                    feedback/reviews can be valuable and provide insights, it's important to consider that different
+                    users have different perspectives, experiences, and biases. It's advisable to evaluate
+                    feedback/reviews critically, consider multiple sources, and look for patterns or common themes in
+                    the feedback/reviews to form a more informed opinion.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Can a review be written in more than one language?
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Whether a review can be written in more than one language depends on the
+                    platform or app's features and policies. Some platforms may allow users to write reviews in multiple
+                    languages, while others may have restrictions or guidelines regarding the language used for reviews.
+                    It's best to refer to the specific platform or app's guidelines to determine if writing reviews in
+                    multiple languages is permitted.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Are old reviews removed if a product's features have been updated?
+                </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Generally, old reviews are not automatically removed when a product's
+                    features are updated. Reviews provide a historical record of users' experiences with the product at
+                    a particular time. However, some platforms may allow users to update their reviews to reflect
+                    changes in the product or its features. This way, users can provide feedback based on their
+                    experience with the updated version of the product.</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
