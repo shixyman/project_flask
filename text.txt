@@ -2,3 +2,15 @@ Full Name: Malik Knight
 User Name: 	malik.knight
 Email Address:	malik.knight@example.com
 Password:Q6R_6A7-
+
+
+Full Name: Kling Sauer
+User Name: 	Kling-Sauer
+Email Address:	Kling-Sauer@mail.com
+Password:Q6R_6A7-
+
+
+Full Name: Vandervort Boyer
+User Name: 	Vandervort-Boyer
+Email Address:	Vandervort-Boyer@mail.com
+Password:Q6R_6A7-

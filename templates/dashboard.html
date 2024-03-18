@@ -40,65 +40,70 @@
         content: "✓ ";
     }
 </style>
+<div class="container">
+    <h1>Welcome to the Dashboard!</h1>
 
-<h1>Welcome to the Dashboard!</h1>
-
-<h2>Make a New Product Review</h2>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul class="flash-messages">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
-
-<form method="POST" action="{{ url_for('dashboard') }}" enctype="multipart/form-data" class="needs-validation"
-    novalidate>
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-        {{ form.product_name.label }} {{ form.product_name(size=50, class="form-control", required="required") }}
-        <div class="invalid-feedback">Please enter the product name.</div>
-    </div>
-    <div class="form-group">
-        {{ form.product_type.label }} {{ form.product_type(size=50, class="form-control", required="required") }}
-        <div class="invalid-feedback">Please enter the product type.</div>
-    </div>
-    <div class="form-group">
-        {{ form.product_object.label }} {{ form.product_object(size=50, class="form-control", required="required") }}
-        <div class="invalid-feedback">Please enter the product object.</div>
-    </div>
-    <div class="form-group">
-        {{ form.rating.label }} {{ form.rating(class="form-control", required="required") }}
-        <div class="invalid-feedback">Please select a rating.</div>
-    </div>
-    <div class="form-group">
-        {{ form.comment.label }} {{ form.comment(class="form-control") }}
-    </div>
-    <div class="form-group">
-        {{ form.image_url.label }} {{ form.image_url(class="form-control") }}
-    </div>
-    <div class="form-group">
-        {{ form.submit(class="btn btn-primary") }}
-    </div>
-</form>
-
-<h2>Your Reviews</h2>
-{% if reviews %}
-<ul>
-    {% for review in reviews %}
-    <li>
-        Rating: {{ review.rating }}, Comment: {{ review.comment }}
-        {% if review.image_url %}
-        <img src="{{ review.image_url }}" alt="Review Image">
+    <h2>Make a New Product Review</h2>
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flash-messages alert alert-success alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
-        <a href="{{ url_for('edit_review', review_id=review.id) }}">Edit</a>
-        <a href="{{ url_for('delete_review', review_id=review.id) }}">Delete</a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No reviews found.</p>
-{% endif %}
+        {% endwith %}
+    </div>
+    <form method="POST" action="{{ url_for('dashboard') }}" enctype="multipart/form-data" class="needs-validation"
+        novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.product_name.label }} {{ form.product_name(size=50, class="form-control", required="required") }}
+            <div class="invalid-feedback">Please enter the product name.</div>
+        </div>
+        <div class="form-group">
+            {{ form.product_type.label }} {{ form.product_type(size=50, class="form-control", required="required")
+            }}
+            <div class="invalid-feedback">Please enter the product type.</div>
+        </div>
+        <div class="form-group">
+            {{ form.product_object.label }} {{ form.product_object(size=50, class="form-control",
+            required="required")
+            }}
+            <div class="invalid-feedback">Please enter the product object.</div>
+        </div>
+        <div class="form-group">
+            {{ form.rating.label }} {{ form.rating(class="form-control", required="required") }}
+            <div class="invalid-feedback">Please select a rating.</div>
+        </div>
+        <div class="form-group">
+            {{ form.comment.label }} {{ form.comment(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.image_url.label }} {{ form.image_url(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+
+    <h2>Your Reviews</h2>
+    {% if reviews %}
+    <ul>
+        {% for review in reviews %}
+        <li>
+            Rating: {{ review.rating }}, Comment: {{ review.comment }}
+            {% if review.image_url %}
+            <img src="{{ review.image_url }}" alt="Review Image">
+            {% endif %}
+            <a href="{{ url_for('edit_review', review_id=review.id) }}">Edit</a>
+            <a href="{{ url_for('delete_review', review_id=review.id) }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No reviews found.</p>
+    {% endif %}
+</div>
 {% endblock %}

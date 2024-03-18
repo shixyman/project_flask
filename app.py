@@ -33,7 +33,7 @@ app.config['SECRET_KEY'] = "secret_wabbit"
 #initialize the Database
 app.app_context().push()
 db = SQLAlchemy(app)
-
+ 
 #Create Model
 
 class Users(UserMixin,db.Model):
@@ -107,8 +107,10 @@ def perform_search(search_query):
     return search_results
 
 @app.route('/user/<name>')
+@login_required
 def user(name):
     return render_template("user.html", userName=name)
+
 
 
 # Create custom error pages
@@ -227,6 +229,7 @@ def faq():
     return render_template('faq.html')
 
 
+
 class ProductForm(FlaskForm):
     product_name = StringField('Product Name', validators=[InputRequired()])
     product_type = StringField('Product Type', validators=[InputRequired()])
@@ -240,12 +243,27 @@ class ProductForm(FlaskForm):
     ]
     rating = SelectField('Rating', choices=rating_choices, validators=[InputRequired()])
     comment = StringField('Comment')
-    image_url = StringField('Image URL', validators=[URL()])
+    image_url = StringField('Image URL' )
     submit = SubmitField('Submit')
-
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
+    # class ProductForm(FlaskForm):
+    #     product_name = StringField('Product Name', validators=[InputRequired()])
+    #     product_type = StringField('Product Type', validators=[InputRequired()])
+    #     product_object = StringField('Product Object', validators=[InputRequired()])
+    #     rating_choices = [
+    #         ('poor', 'Poor'),
+    #         ('bad', 'Bad'),
+    #         ('average', 'Average'),
+    #         ('good', 'Good'),
+    #         ('excellent', 'Excellent')
+    #     ]
+    #     rating = SelectField('Rating', choices=rating_choices, validators=[InputRequired()])
+    #     comment = StringField('Comment')
+    #     image_url = StringField('Image URL', validators=[URL()])
+    #     submit = SubmitField('Submit')
+
     form = ProductForm()
 
     if form.validate_on_submit():
@@ -256,15 +274,17 @@ def dashboard():
         comment = form.comment.data
         image_url = form.image_url.data
 
-        # Save the product review to the database
+        # Create a new Product instance
         product = Product(name=product_name, type=product_type, object=product_object)
         db.session.add(product)
         db.session.commit()
 
+        # Create a new Review instance associated with the current user and the product
         review = Review(rating=rating, comment=comment, user=current_user, product=product)
         db.session.add(review)
         db.session.commit()
 
+        # If an image URL is provided, add it to the review
         if image_url:
             review.image_url = image_url
             db.session.commit()
@@ -278,33 +298,52 @@ def dashboard():
     return render_template('dashboard.html', form=form, reviews=reviews)
 
 
+
+
+class EditReviewForm(FlaskForm):
+    rating_choices = [
+        ('poor', 'Poor'),
+        ('bad', 'Bad'),
+        ('average', 'Average'),
+        ('good', 'Good'),
+        ('excellent', 'Excellent')
+    ]
+    rating = SelectField('Rating', choices=rating_choices, validators=[InputRequired()])
+    comment = TextAreaField('Comment', validators=[InputRequired(), Length(max=500)])
+    product_name = StringField('Product Name', validators=[InputRequired()])
+    product_type = StringField('Product Type', validators=[InputRequired()])
+    product_object = StringField('Product Object', validators=[InputRequired()])
+    image_url = StringField('Image URL')
+    submit = SubmitField('Update')
+
 @app.route('/edit_review/<int:review_id>', methods=['GET', 'POST'])
 def edit_review(review_id):
     review = Review.query.get_or_404(review_id)
-    form = ReviewForm()
+    form = EditReviewForm(obj=review)
 
     if form.validate_on_submit():
-        # Update the review with the form data
-        review.rating = form.rating.data
-        review.comment = form.comment.data
-        # Save the updated review to the database
+        form.populate_obj(review)
         db.session.commit()
         flash('Review updated successfully!', 'success')
         return redirect(url_for('dashboard'))
 
-    # Pre-fill the form with the existing review data
-    form.rating.data = review.rating
-    form.comment.data = review.comment
-
     return render_template('edit_review.html', form=form, review=review)
+
 
 @app.route('/delete-review/<int:review_id>', methods=['GET', 'POST'])
 @login_required
 def delete_review(review_id):
     review = Review.query.get_or_404(review_id)
+    
+    # Retrieve the associated product
+    product = review.product
+
+    # Delete the review and the associated product
     db.session.delete(review)
+    db.session.delete(product)
+
     db.session.commit()
-    flash("Review deleted successfully!")
+    flash("Review and associated product deleted successfully!")
     return redirect(url_for('dashboard'))
 
 
@@ -327,7 +366,10 @@ def logout():
         return redirect(url_for('index'))
     else:
         return abort(405)  # Return a 405 error for non-POST requests
-    
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

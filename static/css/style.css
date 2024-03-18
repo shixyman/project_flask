@@ -8,5 +8,37 @@ body {
 #div {
 
 
-    background-color: #E0E7E9;
+    background: radial-gradient(circle, rgba(63, 250, 251, 0.5) 0%, rgba(70, 101, 252, 0.5410539215686274) 100%)
+}
+
+#page {
+    min-height: 100vh;
+    width: 100%;
+    background: radial-gradient(circle, rgba(63, 250, 251, 0.5) 0%, rgba(70, 101, 252, 0.5410539215686274) 100%), url(https://cdn.pixabay.com/photo/2018/09/14/14/31/feedback-3677258_1280.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    border-radius: 5rem;
+    background: rgba(70, 101, 252, 0.5410539215686274);
+    color: #000000;
+    cursor: pointer;
+    background: rgba(63, 250, 251, 0.5);
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.0.4);
+
+}
+
+.btn:hover {
+    letter-spacing: 0.1rem;
+    opacity: 0.8;
+    color: #001F3F;
+    background-color: #1af5f5;
 }

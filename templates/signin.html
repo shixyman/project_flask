@@ -27,7 +27,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container" id="page">
     {% for message in get_flashed_messages() %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{message}}
