@@ -28,10 +28,10 @@ body {
     outline: none;
     border: none;
     border-radius: 5rem;
-    background: rgba(70, 101, 252, 0.5410539215686274);
+    /* background: rgba(5, 41, 219, 0.541); */
     color: #000000;
     cursor: pointer;
-    background: rgba(63, 250, 251, 0.5);
+    background: rgba(44, 1, 146, 0.5);
     box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.0.4);
 
 }
@@ -40,5 +40,10 @@ body {
     letter-spacing: 0.1rem;
     opacity: 0.8;
     color: #001F3F;
-    background-color: #1af5f5;
+    background-color: #8b1af5;
+}
+
+.clear {
+    clear: both;
+    height: 60px;
 }

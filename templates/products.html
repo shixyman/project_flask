@@ -23,7 +23,7 @@
     }
 </style>
 
-<div class="container-fluid mx-1">
+<div class="container-fluid mx-1 py-2">
     <div class="row">
         {% for product in products.items %}
         <div class="col-md-6">
@@ -33,8 +33,6 @@
                     <p class="card-text">Product Type: {{ product.type }}</p>
                     <p class="card-text">Product Object: {{ product.object }}</p>
                     <p class="card-text">Rating: {{ product.reviews[0].rating if product.reviews else 'No rating' }}</p>
-                    <p class="card-text">Poor: {{ product.reviews[0].rating if product.reviews and
-                        product.reviews[0].rating == 'poor' else 'No poor rating' }}</p>
                     <p class="card-text">Comment: {{ product.reviews[0].comment if product.reviews else 'No comment' }}
                     </p>
                     <p class="card-text">Image URL: {{ product.reviews[0].image_url if product.reviews and

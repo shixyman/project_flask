@@ -8,6 +8,8 @@ from datetime import datetime
 from flask_login import login_required, LoginManager, login_user, logout_user, login_required, current_user
 from flask_login import UserMixin
 from flask_paginate import Pagination
+from functools import wraps
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # Create a Flask instance
@@ -44,10 +46,17 @@ class Users(UserMixin,db.Model):
     password = db.Column(db.String(100),nullable=False)
     date_added = db.Column(db.DateTime,default=datetime.utcnow)
     reviews = db.relationship('Review', backref='user', lazy=True)
+    # role = db.Column(db.String(250), nullable=False, default='user')
     
-    #Create A STRING
     def __repr__(self):
-        return '<userName %r>' % self.userName
+        return f"Users(id={self.id}, username='{self.userName}', email='{self.email}')"
+    def __init__(self, fullName, userName, email, password, date_added ):
+        self.fullName = fullName
+        self.userName = userName
+        self.email = email
+        self.password = password
+        self.date_added = date_added
+        # self.role = role
         
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -145,7 +154,7 @@ def signup():
 
         existing_user = Users.query.filter_by(email=email).first()
         if existing_user is None:
-            new_user = Users(fullName=fullName, userName=userName, email=email, password=password)
+            new_user = Users(fullName=fullName, userName=userName, email=email, password=password,date_added=datetime.utcnow() )
             db.session.add(new_user)
             db.session.commit()
 
@@ -367,9 +376,68 @@ def logout():
     else:
         return abort(405)  # Return a 405 error for non-POST requests
 
+#create admin panel
 
 
 
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+
+def admin_login():
+    error_message = None
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Verify the admin credentials
+        if username == 'admin' and check_password_hash(generate_password_hash('admin_password'), password):
+            session['admin_logged_in'] = True
+            return redirect(url_for('admin_panel'))
+        else:
+            error_message = 'Invalid admin credentials. Please try again.'
+
+    return render_template('admin_login.html', error_message=error_message)
+
+def admin_login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('admin_logged_in'):
+            return redirect(url_for('admin_login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+@app.route('/admin/panel')
+@admin_login_required
+def admin_panel():
+    users = Users.query.all()
+    products = Product.query.all()
+    reviews = Review.query.all()
+    return render_template('admin_panel.html', users=users, products=products, reviews=reviews)
+
+@app.route('/admin/delete/user/<int:user_id>', methods=['POST'])
+@admin_login_required
+def delete_user(user_id):
+    user = Users.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+@app.route('/admin/delete/product/<int:product_id>', methods=['POST'])
+@admin_login_required
+def delete_product(product_id):
+    product = Product.query.get(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+@app.route('/admin/delete/review/<int:review_id>', methods=['POST'])
+@admin_login_required
+def deleting_review(review_id):
+    review = Review.query.get(review_id)
+    db.session.delete(review)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))
 
 if __name__ == "__main__":
     app.run(debug=True)

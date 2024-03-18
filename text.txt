@@ -14,3 +14,8 @@ Full Name: Vandervort Boyer
 User Name: 	Vandervort-Boyer
 Email Address:	Vandervort-Boyer@mail.com
 Password:Q6R_6A7-
+
+Full Name: vladmir dirman   
+User Name: 	vladmir-dir
+Email Address:	vladmir-dir@mail.com
+Password:Q6R_6A7-
