@@ -3,7 +3,16 @@
 ## Introduction The Customer Feedback/Review App is a web application designed to gather and manage customer feedback and reviews for various products. It provides a platform for customers to share their opinions, ratings, and reviews, while also offering valuable insights to businesses for improving their products and services.
 
 The app is built using Flask, a lightweight web framework in Python, and utilizes MySQL as the database management system for storing and retrieving data.
+Introduction
 
+
+### Deployed Site: Feedback Review(not yet)
+
+#### Final Project Blog Article: [Feedback Review - Empowering User Feedback]()
+
+## Author(s) LinkedIn:
+
+yousri rachid : [LinkedIn Profile]()
 ## Features 
 - **User Registration and Authentication**: Users can create accounts and log in securely to access the app's features.
 - **Product Listing**: Display a list of available products for customers to browse and leave feedback.
@@ -53,3 +62,6 @@ Contributions to the Customer Feedback/Review App are welcome! If you would like
 ## Contact For any inquiries or questions, please contact [yousri rachid] at [shixymanflowx@gmail.com].
 
 We appreciate your interest in our Customer Feedback/Review App and look forward to your valuable feedback and contributions!
+
+#### [youtube demo](https://youtu.be/XW_obpYwYvE)
+#### [youtube intro](https://youtu.be/TsIBvzheCbw)
