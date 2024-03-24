@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, redirect, url_for, flash, request,session 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextAreaField, SelectField, DecimalField, FileField
@@ -10,7 +11,7 @@ from flask_login import UserMixin
 from flask_paginate import Pagination
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
-
+# import all modules needed in this projects
 
 # Create a Flask instance
 app = Flask(__name__)
