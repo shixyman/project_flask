@@ -24,7 +24,7 @@ def load_user(user_id):
     # Load the user from the database based on the user_id
     return Users.query.get(int(user_id))
 
-#add Database old version
+#add Database old version (using sqllite for test)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # new mysql database
 app.config['SQLALCHEMY_DATABASE_URI'] ='mysql+pymysql://root@localhost/db_rev'
