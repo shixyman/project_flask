@@ -43,6 +43,7 @@ body {
     background-color: #8b1af5;
 }
 
+/* fix area betweend footer and body  */
 .clear {
     clear: both;
     height: 60px;
