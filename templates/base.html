@@ -18,15 +18,17 @@
         {% include 'navbar.html' %}
     </header>
 
-
+    <!-- div container all contents -->
     <div class="container.fluid d-flex flex-column min-vh-100" id="div">
         {% block content%}
 
 
         {% endblock %}
     </div>
-
+    <!-- div fix footer and body -->
     <div class="clear"></div>
+
+    <!-- template for fotter -->
     <footer class="footer">
 
         {% include 'footer.html' %}
