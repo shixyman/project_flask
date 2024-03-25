@@ -12,7 +12,7 @@ Introduction
 
 ## Author(s) LinkedIn:
 
-yousri rachid : [LinkedIn Profile]()
+yousri rachid : [LinkedIn Profile](https://ma.linkedin.com/in/yousri-rachid-105b2a278)
 ## Features 
 - **User Registration and Authentication**: Users can create accounts and log in securely to access the app's features.
 - **Product Listing**: Display a list of available products for customers to browse and leave feedback.
