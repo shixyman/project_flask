@@ -473,5 +473,3 @@ These three code blocks define routes for deleting users, products, and reviews 
 if __name__ == "__main__":
     #The if __name__ == "__main__": block at the end of the code starts the Flask application in debug mode if the script is executed directly.
     app.run(debug=True)
-    
-
